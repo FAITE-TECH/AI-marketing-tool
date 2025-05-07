@@ -70,9 +70,9 @@ list_of_files = [
     f"{src_path}/app/utils/__init__.py",
     f"{src_path}/app/utils/logging.py",
 
-    f"{src_path}/alembic/versions/.gitkeep",
-    f"{src_path}/alembic/env.py",
-    f"{src_path}/alembic/alembic.ini",
+    # f"{src_path}/alembic/versions/.gitkeep",
+    # f"{src_path}/alembic/env.py",
+    # f"{src_path}/alembic/alembic.ini",
 
     f"{src_path}/tests/__init__.py",
     f"{src_path}/tests/conftest.py",
