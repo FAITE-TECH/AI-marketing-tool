@@ -10,9 +10,24 @@ from app.utils.logging import get_logger
 logger = get_logger("main")
 
 app = FastAPI(
-    title=settings.PROJECT_NAME,
-    description="AI-driven Marketing Tool API",
+    title="AI Marketing Tool API",
+    description="""
+    Advanced AI-driven Marketing Tool API with intelligent lead scoring and management.
+    
+    ## Features
+    
+    * **Hybrid Lead Scoring**: Combines rule-based and machine learning approaches
+    * **Lead Management**: Track and analyze leads throughout the marketing funnel
+    * **Data Visualization**: Comprehensive dashboard with lead scoring analytics
+    * **CSV Import/Export**: Bulk process leads and export scoring results
+    * **API Integrations**: Connect with external systems via RESTful API
+    
+    The API provides endpoints for lead management, lead scoring, analytics, and more.
+    """,
+    version="1.0.0",
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    docs_url="/docs",
+    redoc_url="/redoc",
 )
 
 # Set all CORS enabled origins
@@ -33,7 +48,12 @@ logger.info(f"API router included with prefix: {settings.API_V1_STR}")
 @app.get("/")
 async def root():
     logger.info("Root endpoint accessed")
-    return {"message": "Welcome to AI Marketing Tool API"}
+    return {
+        "message": "Welcome to AI Marketing Tool API",
+        "version": "1.0.0",
+        "docs": "/docs",
+        "status": "online"
+    }
 
 if __name__ == "__main__":
     logger.info("Starting application server")

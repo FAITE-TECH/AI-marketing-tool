@@ -10,6 +10,7 @@ from app.core.security import get_current_user, oauth2_scheme
 from app.db.session import SessionLocal
 from app.models.user import User
 from app.schemas.token import TokenPayload
+from app.services.lead_scoring import LeadScoringService
 
 def get_db() -> Generator[Session, None, None]:
     """Get database session."""
@@ -18,3 +19,7 @@ def get_db() -> Generator[Session, None, None]:
         yield db
     finally:
         db.close()
+
+def get_lead_scoring_service(db: Session = Depends(get_db)) -> LeadScoringService:
+    """Get lead scoring service."""
+    return LeadScoringService(db)
