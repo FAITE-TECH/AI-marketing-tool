@@ -8,16 +8,16 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     
     # SECURITY
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "your-secret-key-for-development")
+    SECRET_KEY: str = os.getenv("SECRET_KEY", "")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8  # 8 days
     ALGORITHM: str = "HS256"  # JWT algorithm
     
     # POSTGRESQL
-    POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER", "localhost")
-    POSTGRES_USER: str = os.getenv("POSTGRES_USER", "postgres")
-    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "1234")
-    POSTGRES_DB: str = os.getenv("POSTGRES_DB", "marketing_database")
-    POSTGRES_PORT: str = os.getenv("POSTGRES_PORT", "5432")
+    POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER", "")
+    POSTGRES_USER: str = os.getenv("POSTGRES_USER", "")
+    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "")
+    POSTGRES_DB: str = os.getenv("POSTGRES_DB", "")
+    POSTGRES_PORT: str = os.getenv("POSTGRES_PORT", "")
     
     SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
     
@@ -32,7 +32,12 @@ class Settings(BaseSettings):
     BUFFER_API_KEY: str = os.getenv("BUFFER_API_KEY", "")
     
     # CORS
-    BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:8000"]
+    BACKEND_CORS_ORIGINS: List[str] = [
+        "http://localhost:3000", 
+        "http://localhost:8000",
+        # Add more frontend origins as needed
+        "*"  # This allows any origin - for development only, remove in production!
+    ]
     
     class Config:
         case_sensitive = True
@@ -40,3 +45,6 @@ class Settings(BaseSettings):
 
 settings = Settings()
 settings.SQLALCHEMY_DATABASE_URI = settings.get_database_uri
+
+
+
